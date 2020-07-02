@@ -1,0 +1,18 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'ripLove' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ripLove
+ pod 'GoogleSignIn'
+ pod 'FirebaseUI', '~> 8.0' 
+ pod 'SVProgressHUD'
+ pod 'SCLAlertView'
+ pod 'SDWebImage'
+ pod 'Firebase/Auth'
+ pod 'RxSwift'
+ pod 'RxCocoa'
+ pod 'Nuke'
+end
