@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQM-ul-dVX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="uT9-cG-vHj">
+            <objects>
+                <viewController id="LQM-ul-dVX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Yv-E0-drv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfy-z7-GZW">
+                                <rect key="frame" x="0.0" y="20" width="414" height="794"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qd8-nq-ikF">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="442"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_anonymous.png" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-nR-miz">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="354"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="414" id="UgA-nO-hWd"/>
+                                                    <constraint firstAttribute="width" secondItem="fcc-nR-miz" secondAttribute="height" multiplier="69:59" id="jrK-rm-sH3"/>
+                                                </constraints>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sc-iR-Q66">
+                                                <rect key="frame" x="0.0" y="362" width="414" height="80"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7Q-aT-863">
+                                                        <rect key="frame" x="8" y="8" width="99" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="年齢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4o-aH-bMd">
+                                                        <rect key="frame" x="8" y="37" width="35" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qd8-nq-ikF" firstAttribute="top" secondItem="1qW-6U-vhk" secondAttribute="top" id="2JR-lh-hdU"/>
+                                    <constraint firstItem="1qW-6U-vhk" firstAttribute="bottom" secondItem="qd8-nq-ikF" secondAttribute="bottom" constant="352" id="T0o-Z5-mPm"/>
+                                    <constraint firstAttribute="bottom" secondItem="qd8-nq-ikF" secondAttribute="bottom" constant="363" id="bQF-lj-gwY"/>
+                                    <constraint firstAttribute="trailing" secondItem="qd8-nq-ikF" secondAttribute="trailing" id="dnC-sv-mYD"/>
+                                    <constraint firstItem="qd8-nq-ikF" firstAttribute="leading" secondItem="mfy-z7-GZW" secondAttribute="leading" id="vvS-yC-nWp"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="sMs-Ae-8PQ"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="1qW-6U-vhk"/>
+                            </scrollView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fyY-UQ-J8O">
+                                <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSp-nv-h2W">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="xsP-z7-6Jb"/>
+                                        </constraints>
+                                        <state key="normal" title="メールする">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVT-pX-DE1">
+                                        <rect key="frame" x="207" y="0.0" width="207" height="40"/>
+                                        <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.80201198630000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Wq2-mN-4x0"/>
+                                        </constraints>
+                                        <state key="normal" title="電話する">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="j4i-LM-i29"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="mfy-z7-GZW" firstAttribute="leading" secondItem="5Yv-E0-drv" secondAttribute="leading" id="6wY-WU-lpn"/>
+                            <constraint firstItem="fyY-UQ-J8O" firstAttribute="trailing" secondItem="Arb-ee-ZiX" secondAttribute="trailing" id="8Gb-3r-YGR"/>
+                            <constraint firstItem="fyY-UQ-J8O" firstAttribute="top" secondItem="mfy-z7-GZW" secondAttribute="bottom" constant="8" symbolic="YES" id="8RI-sL-tsm"/>
+                            <constraint firstItem="fyY-UQ-J8O" firstAttribute="leading" secondItem="Arb-ee-ZiX" secondAttribute="leading" id="EOB-4l-mew"/>
+                            <constraint firstItem="fyY-UQ-J8O" firstAttribute="trailing" secondItem="Arb-ee-ZiX" secondAttribute="trailing" id="Xgb-hX-9HP"/>
+                            <constraint firstItem="mfy-z7-GZW" firstAttribute="centerX" secondItem="5Yv-E0-drv" secondAttribute="centerX" id="gIL-Yt-6uZ"/>
+                            <constraint firstItem="fyY-UQ-J8O" firstAttribute="bottom" secondItem="Arb-ee-ZiX" secondAttribute="bottom" id="lok-Sq-uVo"/>
+                            <constraint firstItem="mfy-z7-GZW" firstAttribute="top" secondItem="5Yv-E0-drv" secondAttribute="top" constant="20" symbolic="YES" id="srt-5l-RPG"/>
+                            <constraint firstItem="fyY-UQ-J8O" firstAttribute="leading" secondItem="Arb-ee-ZiX" secondAttribute="leading" id="vAc-Qg-bz6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Arb-ee-ZiX"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ew-ZB-a1L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140.57971014492756" y="118.52678571428571"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_anonymous.png" width="24" height="24"/>
+    </resources>
+</document>
