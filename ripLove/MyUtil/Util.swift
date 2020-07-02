@@ -34,9 +34,8 @@ class Util: NSObject {
         return image
     }
     
-    /// ナビゲーションバーに表示するアプリのロゴを取得
+    /// ナビゲーションバーに表示する
     static func getNavigationTitle() -> UIImageView {
-
         var image = UIImage(named:"logo")
         let reSize = CGSize(width: image!.size.width * 0.8, height: image!.size.height * 0.8)
         image = image?.reSizeImage(reSize: reSize)
@@ -48,7 +47,6 @@ class Util: NSObject {
         
         let vc = UIStoryboard(name: storyBoardName, bundle: nil).instantiateInitialViewController()!
         UIApplication.shared.keyWindow?.rootViewController = vc
-        
     }
     
     static func showError() {

@@ -169,7 +169,7 @@
 				034E4874246A16C600CCACD9 /* SignUpViewController.swift */,
 				037D8DD1247B459500F553C4 /* Briding-Header.h */,
 				037D8DD2247B459500F553C4 /* Briding-Header.m */,
-				03A573682475F51E008A9055 /* dataModel */,
+				03A573682475F51E008A9055 /* Model */,
 				03A4739D246F504900B2DB5B /* MainTab */,
 				03A4739E246F505900B2DB5B /* Home */,
 				03A4739F246F506B00B2DB5B /* Matching */,
@@ -284,13 +284,13 @@
 			path = Option;
 			sourceTree = "<group>";
 		};
-		03A573682475F51E008A9055 /* dataModel */ = {
+		03A573682475F51E008A9055 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				039F18D224720D480027082C /* Post.swift */,
 				039F18D424720D5E0027082C /* AppUser.swift */,
 			);
-			path = dataModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		03A6EC5F248DBA5F00A97BD8 /* ChatRoom */ = {
