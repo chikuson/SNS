@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006E6CAA24B1710B0062C62D /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006E6CA924B1710B0062C62D /* SignUpModel.swift */; };
 		03309C80246B7A6400CC92F9 /* Option.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03309C7F246B7A6400CC92F9 /* Option.storyboard */; };
 		03309C82246B7AE900CC92F9 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03309C81246B7AE900CC92F9 /* OptionViewController.swift */; };
 		034E4871246A16C600CCACD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E4870246A16C600CCACD9 /* AppDelegate.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		006E6CA924B1710B0062C62D /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		03309C7F246B7A6400CC92F9 /* Option.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Option.storyboard; sourceTree = "<group>"; };
 		03309C81246B7AE900CC92F9 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		034E486D246A16C600CCACD9 /* ripLove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ripLove.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +291,7 @@
 			children = (
 				039F18D224720D480027082C /* Post.swift */,
 				039F18D424720D5E0027082C /* AppUser.swift */,
+				006E6CA924B1710B0062C62D /* SignUpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				03A4739B246F500200B2DB5B /* DateUtil.swift in Sources */,
 				039F18D324720D480027082C /* Post.swift in Sources */,
 				03309C82246B7AE900CC92F9 /* OptionViewController.swift in Sources */,
+				006E6CAA24B1710B0062C62D /* SignUpModel.swift in Sources */,
 				03DF26BF246E08580055C44F /* ChatEntity.swift in Sources */,
 				03DF26AB246CBF880055C44F /* MatchingViewController.swift in Sources */,
 				03A12207247C96220002FAAE /* MypageViewController.swift in Sources */,

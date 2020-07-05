@@ -18,46 +18,46 @@ class SignUpViewController: UIViewController,FUIAuthDelegate {
 
     @IBOutlet weak var mailTextFiled: UITextField!
     @IBOutlet weak var passwordFiled: UITextField!
-    @IBOutlet weak var profileImageButton: UIButton!{
-        didSet{
-            profileImageButton.layer.cornerRadius = 100
-            profileImageButton.layer.borderWidth = 1
-            profileImageButton.layer.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240).cgColor
-            profileImageButton.addTarget(self, action: #selector(tappedProfileImageButton), for: .touchUpInside)
-        }
-    }
+    @IBOutlet weak var displayedPasswordLabel: UILabel!
+    @IBOutlet weak var alertPasswordLabel: UILabel!
+    @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var userNameTextFiled: UITextField!
     
     //TODO: 装飾　DSFloatingButton
-    @IBOutlet weak var registerButton: UIButton!{
-        didSet{
-            registerButton.addTarget(self, action: #selector(tappedRegisterButton), for: .touchUpInside)
-            registerButton.isEnabled = false
-            registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
-        }
-    }
+    @IBOutlet weak var registerButton: UIButton!
     // ユーザー情報
     var user: AppUser!
     var ref: DatabaseReference!
-    
-    // RXswift
-    let disposeBag = DisposeBag()
+
+    // RxSwift関連
+    private let signModel = SignUpModel()
+    private let disposeBag = DisposeBag()
+    private var minimumInputLength: Int = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mailTextFiled.delegate = self
-        passwordFiled.delegate = self
-        userNameTextFiled.delegate = self
-        passwordFiled.isSecureTextEntry = true // 文字を非表示に
-        
+        setUpView()
         registerSkip()
-        observableRegisterUserInfo()
+        userRegisterInfoBind()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+    func setUpView() {
+        mailTextFiled.delegate = self
+        userNameTextFiled.delegate = self
+        passwordFiled.delegate = self
+        passwordFiled.isSecureTextEntry = true // 文字を非表示に
+    
+        alertPasswordLabel.text = "6文字以上入力してください"
+        alertPasswordLabel.textColor = UIColor.red
+        
+        profileImageButton.layer.cornerRadius = 100
+        profileImageButton.layer.borderWidth = 1
+        profileImageButton.layer.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240).cgColor
+        profileImageButton.addTarget(self, action: #selector(tappedProfileImageButton), for: .touchUpInside)
+        
+        registerButton.addTarget(self, action: #selector(tappedRegisterButton), for: .touchUpInside)
+        registerButton.isEnabled = false
+        registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -76,26 +76,27 @@ class SignUpViewController: UIViewController,FUIAuthDelegate {
         }
     }
     
-    func observableRegisterUserInfo () {
-        Observable.combineLatest(mailTextFiled.rx.text.asObservable(), passwordFiled.rx.text.asObservable())
-            .subscribe(onNext: {
-                (value) in
-                if self.passwordFiled.text!.count >= 6{
-                    self.registerButton.isEnabled = false
+    private func userRegisterInfoBind() {
+        passwordFiled.rx.text.orEmpty.asObservable()
+            .subscribe { [weak self]  in
+                // passwordFiled 値の更新通知を行う
+                guard let textValue = $0.element else { return }
+                self?.signModel.set(text: textValue)
+                if textValue.count > self?.minimumInputLength ?? 6 {
+                    self?.alertPasswordLabel.textColor = UIColor.red
+                }else{
+                    self?.alertPasswordLabel.textColor = UIColor.lightGray
                 }
-                
-            },
-                       onError: { (err) in
-                        // TODO: エラー時のダイアログ表示
-                        print(err)
-            },
-                       onCompleted: {
-                        print("完了しました")
-    
-            },
-                       onDisposed: {
-                        
-            }).disposed(by: disposeBag)
+        }
+        .disposed(by: disposeBag)
+        
+        signModel.password.asObservable()
+            .subscribe {
+                [weak self] in
+                // signModelの更新処理をする
+                self?.displayedPasswordLabel.text = $0.element
+        }
+        .disposed(by: disposeBag)
     }
 
     // 画像タップ時の処理

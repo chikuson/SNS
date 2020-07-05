@@ -132,6 +132,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMW-90-1rk">
+                                <rect key="frame" x="244" y="419" width="150" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="7ac-j8-pml"/>
+                                    <constraint firstAttribute="width" constant="150" id="o4j-Qq-0Yh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIQ-Kq-dHs">
+                                <rect key="frame" x="20" y="419" width="100" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="sFK-3V-RWT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -140,15 +159,19 @@
                             <constraint firstItem="EEo-M1-ztM" firstAttribute="top" secondItem="nZa-t1-k8Q" secondAttribute="top" id="33q-pm-j5m"/>
                             <constraint firstItem="EEo-M1-ztM" firstAttribute="centerX" secondItem="GJu-3i-c4y" secondAttribute="centerX" id="4El-mG-9SM"/>
                             <constraint firstItem="FPP-1h-7T4" firstAttribute="leading" secondItem="nZa-t1-k8Q" secondAttribute="leading" constant="20" id="4Je-xs-ZOg"/>
+                            <constraint firstItem="nZa-t1-k8Q" firstAttribute="trailing" secondItem="nMW-90-1rk" secondAttribute="trailing" constant="20" id="4Mq-k0-kHo"/>
+                            <constraint firstItem="nMW-90-1rk" firstAttribute="top" secondItem="av0-B4-up7" secondAttribute="bottom" constant="5" id="7Vt-7R-wEG"/>
                             <constraint firstItem="hhC-5b-rQP" firstAttribute="top" secondItem="MyB-Oy-fKj" secondAttribute="bottom" constant="30" id="7hD-OR-bdo"/>
                             <constraint firstItem="hhC-5b-rQP" firstAttribute="centerX" secondItem="GJu-3i-c4y" secondAttribute="centerX" id="917-Bi-YX8"/>
                             <constraint firstItem="GEe-eU-XU7" firstAttribute="top" secondItem="1Wl-Wz-AMi" secondAttribute="bottom" constant="30" id="B3Z-AI-T8l"/>
                             <constraint firstItem="ril-Wo-sXV" firstAttribute="centerX" secondItem="GJu-3i-c4y" secondAttribute="centerX" id="Cyg-yp-Nj7"/>
+                            <constraint firstItem="WIQ-Kq-dHs" firstAttribute="top" secondItem="av0-B4-up7" secondAttribute="bottom" constant="5" id="H3B-8o-5DQ"/>
                             <constraint firstItem="GEe-eU-XU7" firstAttribute="leading" secondItem="nZa-t1-k8Q" secondAttribute="leading" constant="20" id="KKx-Jz-CEn"/>
                             <constraint firstItem="MyB-Oy-fKj" firstAttribute="top" secondItem="ril-Wo-sXV" secondAttribute="bottom" constant="30" id="N8Q-KH-SxJ"/>
                             <constraint firstItem="ril-Wo-sXV" firstAttribute="top" secondItem="FPP-1h-7T4" secondAttribute="bottom" constant="10" id="Sl2-tl-2dZ"/>
                             <constraint firstItem="nZa-t1-k8Q" firstAttribute="trailing" secondItem="av0-B4-up7" secondAttribute="trailing" constant="20" id="TOL-Ce-rvg"/>
                             <constraint firstItem="av0-B4-up7" firstAttribute="top" secondItem="GEe-eU-XU7" secondAttribute="bottom" constant="10" id="X8G-ZC-VjH"/>
+                            <constraint firstItem="WIQ-Kq-dHs" firstAttribute="leading" secondItem="nZa-t1-k8Q" secondAttribute="leading" constant="20" id="YX9-gX-ebL"/>
                             <constraint firstItem="MyB-Oy-fKj" firstAttribute="centerX" secondItem="GJu-3i-c4y" secondAttribute="centerX" id="YgA-Ya-ZLW"/>
                             <constraint firstItem="o0R-8R-HpO" firstAttribute="leading" secondItem="nZa-t1-k8Q" secondAttribute="leading" constant="20" id="adC-zQ-n2G"/>
                             <constraint firstItem="FPP-1h-7T4" firstAttribute="top" secondItem="av0-B4-up7" secondAttribute="bottom" constant="30" id="bGa-aF-xTf"/>
@@ -166,6 +189,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="mZl-zH-Yqm"/>
                     <connections>
+                        <outlet property="alertPasswordLabel" destination="nMW-90-1rk" id="4St-ed-Ztx"/>
+                        <outlet property="displayedPasswordLabel" destination="WIQ-Kq-dHs" id="f9R-ep-DmU"/>
                         <outlet property="mailTextFiled" destination="1Wl-Wz-AMi" id="qJr-Ki-bjH"/>
                         <outlet property="passwordFiled" destination="av0-B4-up7" id="lpN-IJ-7Rj"/>
                         <outlet property="profileImageButton" destination="EEo-M1-ztM" id="lrf-in-jD9"/>
