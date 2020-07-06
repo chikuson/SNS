@@ -73,7 +73,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="ex:" destination="A5K-MT-L4K" eventType="touchUpInside" id="xaQ-9h-2Vf"/>
+                                    <action selector="tappedLoginButton:" destination="A5K-MT-L4K" eventType="touchUpInside" id="xaQ-9h-2Vf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VqZ-hA-eK6" customClass="DSFloatingButton" customModule="DSFloatingButton">

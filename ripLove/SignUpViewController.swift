@@ -22,12 +22,11 @@ class SignUpViewController: UIViewController,FUIAuthDelegate {
     @IBOutlet weak var alertPasswordLabel: UILabel!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var userNameTextFiled: UITextField!
-    
     //TODO: 装飾　DSFloatingButton
     @IBOutlet weak var registerButton: UIButton!
+    
     // ユーザー情報
     var user: AppUser!
-    var ref: DatabaseReference!
 
     // RxSwift関連
     private let signModel = SignUpModel()
@@ -42,11 +41,7 @@ class SignUpViewController: UIViewController,FUIAuthDelegate {
     }
     
     func setUpView() {
-        mailTextFiled.delegate = self
-        userNameTextFiled.delegate = self
-        passwordFiled.delegate = self
         passwordFiled.isSecureTextEntry = true // 文字を非表示に
-    
         alertPasswordLabel.text = "6文字以上入力してください"
         alertPasswordLabel.textColor = UIColor.red
         
@@ -62,13 +57,13 @@ class SignUpViewController: UIViewController,FUIAuthDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextViewController = segue.destination as! PostTimeLineController
-        let user = sender as! User
+        let user = sender as! AppUser
         nextViewController.me = AppUser(data: ["userID": UD.userid as Any])
     }
     
     func registerSkip(){
         // ユーザー登録スキップ
-        if Auth.auth().currentUser?.uid != nil && UD.userid != nil {
+        if Auth.auth().currentUser?.uid != nil || UD.userid != nil {
             MainTabViewController.instance?.tabSetup()
             Util.gotoStroboard(storyBoardName: "Tab")
         }else{
@@ -76,29 +71,44 @@ class SignUpViewController: UIViewController,FUIAuthDelegate {
         }
     }
     
-    private func userRegisterInfoBind() {
-        passwordFiled.rx.text.orEmpty.asObservable()
-            .subscribe { [weak self]  in
-                // passwordFiled 値の更新通知を行う
-                guard let textValue = $0.element else { return }
-                self?.signModel.set(text: textValue)
-                if textValue.count > self?.minimumInputLength ?? 6 {
-                    self?.alertPasswordLabel.textColor = UIColor.red
-                }else{
-                    self?.alertPasswordLabel.textColor = UIColor.lightGray
-                }
-        }
-        .disposed(by: disposeBag)
+    func userRegisterInfoBind() {
+        
+        Observable.combineLatest(
+        passwordFiled.rx.text.asObservable(),
+        mailTextFiled.rx.text.asObservable(),
+        userNameTextFiled.rx.text.asObservable())
+            
+        .subscribe { [weak self] in
+            let userName = self?.userNameTextFiled.text?.isEmpty ?? false
+            let mail = self?.mailTextFiled.text?.isEmpty ?? false
+            guard let text = $0.element else {return}
+            
+            // passwordFiled 値の更新通知を行う
+            self?.signModel.setUserRegisterInfo(userNameText: text.1 ?? "", passwordText: text.0 ?? "", mailText: text.2 ?? "")
+            
+            if text.0?.count ?? 0 < self?.minimumInputLength ?? 6 || userName || mail {
+                
+                self?.registerButton.isEnabled = false
+                self?.registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
+                self?.alertPasswordLabel.textColor = UIColor.red
+                
+            }else{
+                
+                self?.alertPasswordLabel.textColor = UIColor.lightGray
+                let enable: Bool = ((self?.signModel.isEnableButton()) != nil)
+                self?.registerButton.isEnabled = enable
+                self?.registerButton.backgroundColor = .rgb(red: 0, green: 185, blue: 0)
+            
+            }
+        }.disposed(by: disposeBag)
         
         signModel.password.asObservable()
             .subscribe {
                 [weak self] in
                 // signModelの更新処理をする
                 self?.displayedPasswordLabel.text = $0.element
-        }
-        .disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
     }
-
     // 画像タップ時の処理
     @objc private func tappedProfileImageButton(){
         let imagePicker = UIImagePickerController()
@@ -174,31 +184,11 @@ class SignUpViewController: UIViewController,FUIAuthDelegate {
         }
     }
 
-    @IBAction func ex(_ sender: UIButton) {
-        
-        SVProgressHUD.show(withStatus: "読み込み中")
-        let makeDocument = Firestore.firestore().collection("userData").document()
-        makeDocument.setData([
-            "userName": "初心者",
-            "userID": makeDocument.documentID,
-            "password": makeDocument.documentID,
-            "age":18,
-            "country": "Japan",
-            "createdAt": FieldValue.serverTimestamp(),
-            "image": user?.url
-        ]) {
-            error in
-            SVProgressHUD.dismiss()
-            if error == nil && UD.userid != "" {
-                // ユーザー作成
-                MainTabViewController.instance?.tabSetup()
-                Util.gotoStroboard(storyBoardName: "Tab")
-
-            }else{
-                MainTabViewController.instance?.tabSetup()
-                Util.gotoStroboard(storyBoardName: "Tab")
-
-            }
+    @IBAction func tappedLoginButton(_ sender: UIButton) {
+        if UD.userid != "" {
+            // ユーザー作成
+            MainTabViewController.instance?.tabSetup()
+            Util.gotoStroboard(storyBoardName: "Tab")
         }
     }
     //　メール登録
@@ -255,32 +245,3 @@ extension SignUpViewController: UIImagePickerControllerDelegate,UINavigationCont
         dismiss(animated: true, completion: nil)
     }
 }
-
-// MARK-- UItextFiled
-extension SignUpViewController: UITextFieldDelegate {
-    
-    // TODO: RXに完全移行したら削除
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let mail = self.mailTextFiled.text?.isEmpty ?? false
-        let password = self.passwordFiled.text?.isEmpty ?? false
-        let userName = self.userNameTextFiled.text?.isEmpty ?? false
-        
-        if mail || password || userName {
-            registerButton.isEnabled = false
-            registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
-        }else{
-             registerButton.isEnabled = true
-            registerButton.backgroundColor = .rgb(red: 0, green: 185, blue: 0)
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // キーボードを閉じる
-        textField.resignFirstResponder()
-        return true
-    }
-}
-
-
-
-
