@@ -22,6 +22,7 @@ class UserListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userListTableView.tableFooterView = UIView()
         userListTableView.delegate = self
         userListTableView.dataSource = self
         
@@ -134,7 +135,7 @@ class UserListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        userImageIcon.layer.cornerRadius = 25
+        userImageIcon.layer.cornerRadius = 32.5
         
     }
 }
