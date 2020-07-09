@@ -16,14 +16,14 @@ class ChatRoomCell: UITableViewCell {
     @IBOutlet weak var messageTextViewWidthConstraint: NSLayoutConstraint!
     
     // メッセージのテキストの横制約を可変にする
-    var messageText:String?{
+    var messageText: MessageModel? {
         didSet{
-            guard let text = messageText else { return }
-            let witdh = estimateFrameForTextView(text: text).width
-            
-            messageTextViewWidthConstraint.constant = witdh
-            
-            messageTextView.text = text
+            if let message = messageText {
+                messageTextView.text = message.message
+                let witdh = estimateFrameForTextView(text: message.message).width
+                messageTextViewWidthConstraint.constant = witdh
+                dateLabel.text = Util.dateFormatter(date: message.createdAt.dateValue())   
+            }
         }
     }
     

@@ -57,6 +57,7 @@ class ChatListViewController: UIViewController {
     private func handleAddedDocumentChange(_ documentChanges:DocumentChange) {
         let dic = documentChanges.document.data()
         let chatRoom = ChatRoomModel(dic: dic)
+        chatRoom.documentId = documentChanges.document.documentID
         
         guard let uid = Auth.auth().currentUser?.uid else {return}
         chatRoom.members.forEach { (memberUid) in
@@ -150,9 +151,10 @@ extension ChatListViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard.init(name: "ChatRoom", bundle: nil)
         let chatRoomController = storyBoard.instantiateViewController(withIdentifier: "ChatRoom") as! ChatRoomController
+        chatRoomController.chatroom = chatrooms[indexPath.row]
+        chatRoomController.user = users
         navigationController?.pushViewController(chatRoomController, animated: true)
     }
-    
 }
 
 class ChatListTableViewCell: UITableViewCell {
@@ -164,9 +166,8 @@ class ChatListTableViewCell: UITableViewCell {
                 
                 guard let url = URL(string: chatroom.partnerUser?.url ?? "") else {return}
                 Nuke.loadImage(with: url, into: userImageView)
-                
-                dateLabel.text = dateFormatter(date: chatroom.createdAt.dateValue())
-                
+        
+                dateLabel.text = Util.dateFormatter(date: chatroom.createdAt.dateValue())
             }
         }
     }
@@ -181,13 +182,4 @@ class ChatListTableViewCell: UITableViewCell {
         userImageView.layer.cornerRadius =  30
         
     }
-    // TODO: utilに移動する
-    private func dateFormatter(date: Date) -> String{
-        let formatter  = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "ja_JP")
-        return formatter.string(from: date)
-    }
-    
 }

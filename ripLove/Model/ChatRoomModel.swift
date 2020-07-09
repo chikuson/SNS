@@ -16,10 +16,12 @@ class ChatRoomModel {
     let createdAt: Timestamp
     
     var partnerUser: AppUser?
+    var documentId: String?
     
     init(dic: [String : Any]) {
         self.laseMessageId = dic["laseMessageId"] as? String ?? ""
         self.members = dic["members"] as? [String] ?? [String]()
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
+        
     }
 }

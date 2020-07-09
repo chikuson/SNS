@@ -62,6 +62,14 @@ class Util: NSObject {
 
        SCLAlertView().showInfo(title, subTitle: subTitle) // Info
     }
+    
+    static func dateFormatter(date: Date) -> String{
+        let formatter  = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        formatter.locale = Locale(identifier: "ja_JP")
+        return formatter.string(from: date)
+    }
 }
 
 extension UIImage {

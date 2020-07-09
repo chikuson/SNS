@@ -14,7 +14,10 @@ class ChatRoomController: UIViewController {
     @IBOutlet weak var chatRoomTableView: UITableView!
     
     private let CellId = "CellId"
-    private var messages:[String] = []
+    private var messages:[MessageModel] = []
+    
+    var chatroom: ChatRoomModel?
+    var user: AppUser?
     
     // インスタンスを生成
     private lazy var chatInputAccessoryView: ChatInputAccessoryView = {
@@ -31,6 +34,7 @@ class ChatRoomController: UIViewController {
         chatRoomTableView.dataSource = self
          chatRoomTableView.register(UINib(nibName: "ChatRoomCell", bundle: nil), forCellReuseIdentifier:CellId)
         chatRoomTableView.backgroundColor = .rgb(red: 118, green: 140, blue: 180)
+        featchMessages()
     }
     override var inputAccessoryView: UIView?{
         get{
@@ -40,18 +44,56 @@ class ChatRoomController: UIViewController {
     override var canBecomeFirstResponder: Bool{
         return true
     }
+    
+    private func featchMessages() {
+        Firestore.firestore().collection("chatRooms").document().collection("messages").addSnapshotListener {
+            (snapshot, error) in
+            if let error = error {
+             print("メッセージの取得に失敗しました\(error)")
+                return
+            }
+            snapshot?.documentChanges.forEach({ (documentChange) in
+                switch documentChange.type{
+                    
+                case .added:
+                    let dic = documentChange.document.data()
+
+                    let message = MessageModel(dic: dic)
+                    self.messages.append(message)
+                    self.chatRoomTableView.reloadData()
+                    
+                default:
+                    break
+                }
+            })
+        }
+    }
 }
 // 自作のdelegate
 extension ChatRoomController: ChatInputAccessoryViewDelegate{
     
     func tappedsendButton(text: String) {
-//        messages.append(text)
-//        chatInputAccessoryView.removeText()
-//        // 送信したら空にする
-//        chatInputAccessoryView.chatTextView.text = ""
-//        chatRoomTableView.reloadData()
-        Firestore.firestore().collection("chatRooms").document()
         
+        guard let chatroomDocId = chatroom?.documentId else {return}
+        guard let name = user?.userName else {return}
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        chatInputAccessoryView.removeText()
+        
+        let docData = [
+            "name": name,
+            "createdAt": Timestamp() ,
+            "uid": uid,
+            "message": text
+            ] as [String : Any]
+        
+        Firestore.firestore().collection("chatRooms").document(chatroomDocId).collection("messages").document().setData(docData) {
+            (error) in
+            if let error = error {
+                print("メッセージの読み込みに失敗しました\(error)")
+                return
+            }
+            print("メッセージの保存に成功")
+        }
     }
 }
 

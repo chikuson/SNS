@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		006E6CAA24B1710B0062C62D /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006E6CA924B1710B0062C62D /* SignUpModel.swift */; };
 		007F3ACE24B6F9970057CE2B /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F3ACD24B6F9970057CE2B /* ChatRoomModel.swift */; };
+		007F3AD424B7DAC80057CE2B /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F3AD324B7DAC80057CE2B /* MessageModel.swift */; };
 		03309C80246B7A6400CC92F9 /* Option.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03309C7F246B7A6400CC92F9 /* Option.storyboard */; };
 		03309C82246B7AE900CC92F9 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03309C81246B7AE900CC92F9 /* OptionViewController.swift */; };
 		034E4871246A16C600CCACD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E4870246A16C600CCACD9 /* AppDelegate.swift */; };
@@ -17,7 +18,6 @@
 		034E487A246A16C700CCACD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034E4879246A16C700CCACD9 /* Assets.xcassets */; };
 		034E487D246A16C700CCACD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034E487B246A16C700CCACD9 /* LaunchScreen.storyboard */; };
 		034E4887246A276A00CCACD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034E4884246A19FC00CCACD9 /* GoogleService-Info.plist */; };
-		037D8DD3247B459500F553C4 /* Briding-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D8DD2247B459500F553C4 /* Briding-Header.m */; };
 		0389779E247DDDD2003D6615 /* AlertViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0389779D247DDDD2003D6615 /* AlertViewDialog.swift */; };
 		038977A1247DEA42003D6615 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 038977A0247DEA42003D6615 /* UserDetail.storyboard */; };
 		0399E6592489C238004EBCF7 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0399E6582489C238004EBCF7 /* ChatListViewController.swift */; };
@@ -67,6 +67,7 @@
 /* Begin PBXFileReference section */
 		006E6CA924B1710B0062C62D /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		007F3ACD24B6F9970057CE2B /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
+		007F3AD324B7DAC80057CE2B /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		03309C7F246B7A6400CC92F9 /* Option.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Option.storyboard; sourceTree = "<group>"; };
 		03309C81246B7AE900CC92F9 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		034E486D246A16C600CCACD9 /* ripLove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ripLove.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,8 +79,6 @@
 		034E487E246A16C700CCACD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		034E4884246A19FC00CCACD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		037D8DD0247B459400F553C4 /* ripLove-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ripLove-Bridging-Header.h"; sourceTree = "<group>"; };
-		037D8DD1247B459500F553C4 /* Briding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Briding-Header.h"; sourceTree = "<group>"; };
-		037D8DD2247B459500F553C4 /* Briding-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Briding-Header.m"; sourceTree = "<group>"; };
 		0389779D247DDDD2003D6615 /* AlertViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewDialog.swift; sourceTree = "<group>"; };
 		038977A0247DEA42003D6615 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
 		0399E6582489C238004EBCF7 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +144,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		007F3AD224B7D03B0057CE2B /* Top */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
 		034E4864246A16C600CCACD9 = {
 			isa = PBXGroup;
 			children = (
@@ -171,8 +177,12 @@
 				03A5736B2475FE3E008A9055 /* AccountViewController.swift */,
 				03DB721A24792ADE0051B421 /* Main.storyboard */,
 				034E4874246A16C600CCACD9 /* SignUpViewController.swift */,
-				037D8DD1247B459500F553C4 /* Briding-Header.h */,
-				037D8DD2247B459500F553C4 /* Briding-Header.m */,
+				037D8DD0247B459400F553C4 /* ripLove-Bridging-Header.h */,
+				034E487B246A16C700CCACD9 /* LaunchScreen.storyboard */,
+				034E487E246A16C700CCACD9 /* Info.plist */,
+				034E4884246A19FC00CCACD9 /* GoogleService-Info.plist */,
+				034E4879246A16C700CCACD9 /* Assets.xcassets */,
+				007F3AD224B7D03B0057CE2B /* Top */,
 				03A573682475F51E008A9055 /* Model */,
 				03A4739D246F504900B2DB5B /* MainTab */,
 				03A4739E246F505900B2DB5B /* Home */,
@@ -185,12 +195,7 @@
 				03A4739C246F503000B2DB5B /* MyUtil */,
 				03A6EC60248DBADF00A97BD8 /* Xib */,
 				03A47390246F4E0400B2DB5B /* FontAwesome */,
-				034E4879246A16C700CCACD9 /* Assets.xcassets */,
 				039F18CE2471FDE20027082C /* Dialog */,
-				034E487B246A16C700CCACD9 /* LaunchScreen.storyboard */,
-				034E487E246A16C700CCACD9 /* Info.plist */,
-				034E4884246A19FC00CCACD9 /* GoogleService-Info.plist */,
-				037D8DD0247B459400F553C4 /* ripLove-Bridging-Header.h */,
 			);
 			path = ripLove;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				007F3ACD24B6F9970057CE2B /* ChatRoomModel.swift */,
 				039F18D424720D5E0027082C /* AppUser.swift */,
 				006E6CA924B1710B0062C62D /* SignUpModel.swift */,
+				007F3AD324B7DAC80057CE2B /* MessageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -532,7 +538,6 @@
 			files = (
 				03DF26C6246E08810055C44F /* MyChatViewCell.swift in Sources */,
 				03A5736C2475FE3E008A9055 /* AccountViewController.swift in Sources */,
-				037D8DD3247B459500F553C4 /* Briding-Header.m in Sources */,
 				039F18C8247180CC0027082C /* HomeCell.swift in Sources */,
 				03A47397246F4F3A00B2DB5B /* Util.swift in Sources */,
 				0399E65B2489C554004EBCF7 /* UIColort-Extention.swift in Sources */,
@@ -561,6 +566,7 @@
 				03A473A3246FD3A800B2DB5B /* HomeViewController.swift in Sources */,
 				034E4873246A16C600CCACD9 /* SceneDelegate.swift in Sources */,
 				03DF26B9246E083B0055C44F /* ChatRoomInputView.swift in Sources */,
+				007F3AD424B7DAC80057CE2B /* MessageModel.swift in Sources */,
 				0399E65F2489C802004EBCF7 /* ChatRoomController.swift in Sources */,
 				0389779E247DDDD2003D6615 /* AlertViewDialog.swift in Sources */,
 				03DF26BA246E083B0055C44F /* MyBalloonView.swift in Sources */,
