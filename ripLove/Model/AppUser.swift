@@ -18,6 +18,8 @@ class AppUser {
     var url: String = "image" //　画像URL
     let email: String // email
     let createdAt: Timestamp //ユーザー登録日
+    
+    var uid: String?
 
     init(data: [String: Any]) {
         userID = data["userID"] as? String ?? ""

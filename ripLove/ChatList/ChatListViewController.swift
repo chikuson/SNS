@@ -8,28 +8,68 @@
 
 import UIKit
 import Firebase
+import Nuke
 
 class ChatListViewController: UIViewController {
 
     let CellId = "Cell"
-//    private var users: AppUser?{
-//        didSet{
-//            navigationItem.title = users?.userName
-//        }
-//    }
+    private var chatrooms = [ChatRoomModel]()
     
-    var users: [AppUser] = []
-    
+    private var users: AppUser?{
+        didSet{
+            navigationItem.title = users?.userName
+        }
+    }
     
     @IBOutlet weak var chatListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
         
-        // ログインユーザーの読み込み
-        //fetchLoginUserInfo()
-        fetchuserInfoFromFirestore()
+        setUpViews()
+        fetchLoginUserInfo()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchChatRoomInfoFromFirestore()   
+    }
+    
+    private func fetchChatRoomInfoFromFirestore() {
+        Firestore.firestore().collection("chatRooms").getDocuments {
+            (snapshot, err) in
+            
+            if let err = err {
+                // TODO: エラーハンドリング、ダイアログ
+                print("失敗\(err)")
+            }
+            snapshot?.documents.forEach({ (snapshot) in
+                let dic = snapshot.data()
+                let chatRoom = ChatRoomModel(dic: dic)
+                
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                chatRoom.members.forEach { (memberUid) in
+                    if memberUid != uid {
+                        // ユーザー情報取得
+                        Firestore.firestore().collection("users").document(memberUid).getDocument {
+                            (snapshot, error) in
+                            if let error = error {
+                                print("取得に失敗しました\(error)")
+                                return
+                            }
+                            guard let dic = snapshot?.data() else {return}
+                            let user = AppUser(data: dic)
+                            user.uid = snapshot?.documentID
+                            
+                            chatRoom.partnerUser = user
+                            self.chatrooms.append(chatRoom)
+                            self.chatListTableView.reloadData()
+                        }
+                    }
+                }
+            })
+        }
     }
     
     func setUpViews() {
@@ -61,58 +101,38 @@ class ChatListViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "UserList", bundle: nil)
         let userList = storyboard.instantiateViewController(identifier: "UserListViewController")
         let navi = UINavigationController.init(rootViewController: userList)
+        navi.modalPresentationStyle = .fullScreen
         self.present(navi, animated: true, completion: nil)
     }
     
-//    private func fetchLoginUserInfo(){
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        Firestore.firestore().collection("users").document(uid).getDocument {
-//            (snapShot, err) in
-//            if let err = err {
-//             print("読み込みに失敗しました\(err)")
-//            }
-//
-//            guard let snapshot = snapShot, let dic = snapShot?.data() else { return }
-//
-//            let user = AppUser(data: dic)
-//            self.users.append(user)
-//            self.users = user
-//            self.chatListTableView.reloadData()
-//        }
-//    }
-
-    private func fetchuserInfoFromFirestore() {
-        Firestore.firestore().collection("users").getDocuments {
-            (snapshots, error) in
-            if let error = error {
-                print("読み込み失敗")
-                return
+    private func fetchLoginUserInfo(){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument {
+            (snapShot, err) in
+            if let err = err {
+             print("読み込みに失敗しました\(err)")
             }
-            snapshots?.documents.forEach({
-                (snapshots) in
-                let dic = snapshots.data()
-                let user = AppUser.init(data: dic)
-                self.users.append(user)
-                
-                self.chatListTableView.reloadData()
-                
-//                self.users.forEach { (AppUser) in
-//                    print(AppUser.userName)
-//                }
-            })
+
+            guard let snapshot = snapShot, let dic = snapShot?.data() else { return }
+
+            let user = AppUser(data: dic)
+            self.users = user
+            //self.users.append(user)
+            self.chatListTableView.reloadData()
+            
         }
     }
 }
+
 // MARK -- TableViewCell
 extension ChatListViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return chatrooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatListTableView.dequeueReusableCell(withIdentifier: CellId, for: indexPath) as! ChatListTableViewCell
-        // ユーザー情報渡す
-        cell.user = users[indexPath.row]
+        cell.chatroom = chatrooms[indexPath.row]
         return cell
     }
     
@@ -130,14 +150,15 @@ extension ChatListViewController: UITableViewDelegate,UITableViewDataSource{
 
 class ChatListTableViewCell: UITableViewCell {
     
-    var user: AppUser?{
+    var chatroom: ChatRoomModel? {
         didSet{
-            if let user = user {
-                partnerLabel.text = user.userName
-                dateLabel.text = dateFormatter(date: (user.createdAt.dateValue()))
-                latestMessageLabel.text = user.email
-                // todo ユーザー画像を表示
+            if let chatroom = chatroom {
+                partnerLabel.text = chatroom.partnerUser?.userName
                 
+                guard let url = URL(string: chatroom.partnerUser?.url ?? "") else {return}
+                Nuke.loadImage(with: url, into: userImageView)
+                
+                dateLabel.text = dateFormatter(date: chatroom.createdAt.dateValue())
                 
             }
         }
@@ -153,7 +174,7 @@ class ChatListTableViewCell: UITableViewCell {
         userImageView.layer.cornerRadius =  35
         
     }
-    
+    // TODO: utilに移動する
     private func dateFormatter(date: Date) -> String{
         let formatter  = DateFormatter()
         formatter.dateStyle = .full
