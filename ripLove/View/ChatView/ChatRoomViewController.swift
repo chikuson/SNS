@@ -30,7 +30,7 @@ class ChatRoomViewController: UIViewController {
 	}
 	
 	override var inputAccessoryView: UIView? {
-		return bottomView //通常はテキストフィールドのプロパティに設定しますが、画面を表示している間は常に表示したいため、ViewControllerのプロパティに設定します
+		return bottomView
 	}
 }
 

@@ -10,7 +10,6 @@
         <!--Navigation Controller-->
         <scene sceneID="pc6-3K-3Iu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yD0-lo-zE9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="Wz5-Xh-eSp" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IrV-x7-Fh4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -20,6 +19,7 @@
                         <segue destination="rdD-ui-I50" kind="relationship" relationship="rootViewController" id="GWo-jd-3Qo"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yD0-lo-zE9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1048" y="88"/>
         </scene>
@@ -43,14 +43,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hch-yn-yE5">
-                                                    <rect key="frame" x="10" y="10" width="50" height="50"/>
+                                                    <rect key="frame" x="10" y="2.5" width="65" height="65"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Hch-yn-yE5" secondAttribute="height" multiplier="1:1" id="F5f-FV-7kx"/>
-                                                        <constraint firstAttribute="width" constant="50" id="Wou-ts-OdE"/>
+                                                        <constraint firstAttribute="width" constant="65" id="Wou-ts-OdE"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8Q-8i-uD6">
-                                                    <rect key="frame" x="75" y="24.5" width="42" height="21"/>
+                                                    <rect key="frame" x="90" y="24.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
