@@ -60,6 +60,10 @@ class ChatListViewController: UIViewController {
         chatRoom.documentId = documentChanges.document.documentID
         
         guard let uid = Auth.auth().currentUser?.uid else {return}
+        let isContain = chatRoom.members.contains(uid)
+        
+        if !isContain { return }
+        
         chatRoom.members.forEach { (memberUid) in
             if memberUid != uid {
                 // ユーザー情報取得

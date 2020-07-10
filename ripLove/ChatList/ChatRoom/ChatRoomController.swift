@@ -36,11 +36,13 @@ class ChatRoomController: UIViewController {
         chatRoomTableView.backgroundColor = .rgb(red: 118, green: 140, blue: 180)
         featchMessages()
     }
+    
     override var inputAccessoryView: UIView?{
         get{
             return chatInputAccessoryView
         }
     }
+    
     override var canBecomeFirstResponder: Bool{
         return true
     }
@@ -59,6 +61,7 @@ class ChatRoomController: UIViewController {
                     let dic = documentChange.document.data()
 
                     let message = MessageModel(dic: dic)
+                    message.partnerUser = self.chatroom?.partnerUser
                     self.messages.append(message)
                     self.chatRoomTableView.reloadData()
                     
