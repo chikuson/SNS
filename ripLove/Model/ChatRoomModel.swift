@@ -11,15 +11,16 @@ import Firebase
 
 class ChatRoomModel {
     
-    let laseMessageId: String
+    let latestMessageId: String
     let members: [String]
     let createdAt: Timestamp
     
     var partnerUser: AppUser?
     var documentId: String?
+    var latestMessage: MessageModel?
     
     init(dic: [String : Any]) {
-        self.laseMessageId = dic["laseMessageId"] as? String ?? ""
+        self.latestMessageId = dic["laseMessageId"] as? String ?? ""
         self.members = dic["members"] as? [String] ?? [String]()
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
         
